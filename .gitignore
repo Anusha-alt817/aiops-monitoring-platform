@@ -1,0 +1,33 @@
+# Python virtual environments
+rag-venv/
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.aws/
+
+# ChromaDB generated database
+chroma_db/
+
+# Generated reports
+reports/*
+!reports/README.md
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
