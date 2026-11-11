@@ -6,7 +6,7 @@ An end-to-end AIOps project that monitors a banking application, detects abnorma
 
 This project combines traditional DevOps monitoring with Generative AI to improve incident detection and troubleshooting.
 
-It uses Prometheus and Grafana for monitoring, Python for anomaly detection and incident processing, ChromaDB for vector storage, LangChain for RAG orchestration, and Amazon Bedrock for AI-powered incident analysis.
+It uses Prometheus and Grafana for monitoring, Python for anomaly detection and incident processing, ChromaDB for vector storage, LangChain and LlamaIndex for RAG retrieval, and Amazon Bedrock for AI-powered incident analysis.
 
 ## Architecture
 
@@ -14,9 +14,21 @@ Banking Application -> Flask APIs -> Prometheus -> Grafana
 
 Python AIOps Engine -> Anomaly Detection + Log Analysis -> Incident Reports
 
-Incident Knowledge -> ChromaDB Vector Database -> RAG Retrieval
-
-LangChain Pipeline -> Amazon Bedrock -> AI Incident Investigation -> Markdown Reports
+Incident Knowledge -> ChromaDB Vector Database
+                         |
+              +----------+----------+
+              |                     |
+          LangChain             LlamaIndex
+              |                     |
+              +------ RAG Retrieval-+
+                         |
+                  Incident Context
+                         |
+              LangChain + Amazon Bedrock
+                         |
+              AI Incident Investigation
+                         |
+                  Markdown Reports
 
 ## Technology Stack
 
@@ -27,7 +39,7 @@ LangChain Pipeline -> Amazon Bedrock -> AI Incident Investigation -> Markdown Re
 | Containers | Docker |
 | Monitoring | Prometheus, Grafana, Node Exporter |
 | Automation | Python, Bash |
-| AI Framework | LangChain |
+| AI Frameworks | LangChain, LlamaIndex |
 | Generative AI | Amazon Bedrock, Claude Haiku 4.5 |
 | RAG | Retrieval-Augmented Generation |
 | Vector Database | ChromaDB |
@@ -44,8 +56,10 @@ LangChain Pipeline -> Amazon Bedrock -> AI Incident Investigation -> Markdown Re
 5. Historical incident knowledge management.
 6. ChromaDB vector ingestion and semantic retrieval.
 7. LangChain-based RAG pipeline.
-8. Amazon Bedrock AI-assisted incident analysis.
-9. Markdown incident report generation.
+8. LlamaIndex-based RAG retrieval using the same ChromaDB collection.
+9. LangChain vs. LlamaIndex retrieval comparison using identical questions.
+10. Amazon Bedrock AI-assisted incident analysis.
+11. Markdown incident report generation.
 
 ## Application Endpoints
 
@@ -66,9 +80,11 @@ LangChain Pipeline -> Amazon Bedrock -> AI Incident Investigation -> Markdown Re
 4. The AIOps pipeline generates incident reports.
 5. Historical incidents are stored in the knowledge base.
 6. ChromaDB retrieves relevant troubleshooting documents.
-7. LangChain combines incident questions with retrieved context.
-8. Amazon Bedrock generates AI-assisted investigation results.
-9. The report writer saves analysis as Markdown reports.
+7. LangChain and LlamaIndex retrieve relevant incident knowledge from the shared ChromaDB collection.
+8. Both frameworks are compared using the same incident question and top-three retrieval results.
+9. LangChain combines incident questions with retrieved context.
+10. Amazon Bedrock generates AI-assisted investigation results.
+11. The report writer saves analysis as Markdown reports.
 
 ## Safety and Reliability
 
@@ -93,12 +109,13 @@ LangChain Pipeline -> Amazon Bedrock -> AI Incident Investigation -> Markdown Re
 - Automated incident reporting implemented.
 - ChromaDB ingestion and retrieval implemented.
 - LangChain RAG integration implemented.
+- LlamaIndex RAG integration implemented.
+- LangChain vs. LlamaIndex retrieval comparison completed using shared ChromaDB storage.
 - Amazon Bedrock incident analysis tested.
 - Markdown report generation tested with sample data.
 
 ## Future Enhancements
 
-- Add LlamaIndex as an alternative RAG framework.
 - Demonstrate GitHub Copilot and Amazon Q Developer.
 - Improve incident classification and root cause analysis.
 - Add CI/CD automation for application deployment.
